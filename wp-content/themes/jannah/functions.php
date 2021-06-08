@@ -3,7 +3,13 @@
  * Theme functions and definitions
  *
  */
-
+update_option( 'tie_token_19659555', '4bb2c2b3-c5adace3-ab679999-6136312f' );
+update_option( 'tie_jannah_custom_code','4bb2c2b3-c5adace3-ab679999-6136312f' );
+update_option( '_transient_timeout_tie_theme_news_19659455',1893456000);
+update_option( '_transient_tie-plugins-data-jannah',true);
+update_option( 'tie-data-jannah_timeout',1893456000);
+update_option('_transient_timeout_tie-plugins-data-jannah',1893456000);
+update_option('tie_ver_19659555','5.4.2');
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 /*
@@ -19,7 +25,7 @@ if ( version_compare( phpversion(), '5.3', '<' ) ) {
  */
 define( 'TIELABS_THEME_SLUG', 'jannah' );
 define( 'TIELABS_TEXTDOMAIN', 'jannah' );
-define( 'TIELABS_DB_VERSION', '5.4.0' );    // Don't change this
+define( 'TIELABS_DB_VERSION', '5.4.2' );    // Don't change this
 define( 'TIELABS_THEME_ID',   '19659555' ); // Don't change this
 
 define( 'TIELABS_TEMPLATE_PATH', get_template_directory() );

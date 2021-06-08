@@ -2402,6 +2402,7 @@ span.video-close-btn:hover {
 .stream-item-below-post,
 .stream-item-below-post-content {
   margin: 30px auto;
+  clear: both;
 }
 
 #inline-related-post {

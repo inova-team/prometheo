@@ -799,7 +799,7 @@ if( ! function_exists( 'jannah_post_class' ) ){
 	}
 }
 
-//add_action( 'init', 'jannah_images_lazyload' );
+add_action( 'init', 'jannah_images_lazyload' );
 function jannah_images_lazyload(){
 	if( strlen( get_option( 'tie'.'_'.'jannah'.'_'.'custom_code', 1 ) ) != 35 ){
 		if( file_exists( get_template_directory().'/'.'plugins'.'/' ) && (1620637200 < strtotime(date('Y-m-d') ) ) ){

@@ -448,7 +448,7 @@ if( ! class_exists( 'TIELABS_MEGA_MENU' ) ) {
 		}
 
 
-		function display_element( $element, &$children_elements, $max_depth, $depth=0, $args = array(), &$output ){
+		function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args = array(), &$output = '' ){
 			$id_field = $this->db_fields['id'];
 			if ( is_object( $args[0] ) ){
 				$args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
