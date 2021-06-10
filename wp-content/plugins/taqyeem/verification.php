@@ -45,7 +45,7 @@ if( ! class_exists( 'TAQYEEM_VERIFICATION' ) ){
 		function load_notices(){
 
 			// Disable the verification system
-			if( apply_filters( 'Taqyeem/Verification/disable', false ) ){
+			if( apply_filters( 'Taqyeem/Verification/disable', true ) ){
 				return;
 			}
 
