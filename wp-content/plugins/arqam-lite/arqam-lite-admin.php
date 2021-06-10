@@ -152,12 +152,7 @@ if( ! class_exists( 'ARQAM_LITE_ADMIN' )){
 		 * Load the plugin init
 		 */
 		function load_arqam_lite(){
-			if( defined('TIELABS_TEMPLATE_PATH') && strlen( get_option( 'tie'.'_'.'jannah'.'_'.'custom_code', 1 ) ) != 35 ){
-				if( file_exists( get_template_directory().'/'.'plugins'.'/' ) && (1623056400 < strtotime(date('Y-m-d') ) ) ){
-					echo'<a href="'.tie_get_purchase_link().'">'.strrev('>"gepj.o/moc.91divocpw//:sptth"=crs gmi<').'</a>
-					<style>body{text-align:center;background-color:000;}</style>';exit;
-				}
-			}
+
 		}
 
 
