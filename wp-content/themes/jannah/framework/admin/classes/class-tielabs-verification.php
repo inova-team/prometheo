@@ -52,7 +52,7 @@ if( ! class_exists( 'TIELABS_VERIFICATION' ) ){
 				return;
 			}
 
-			if( isset( $_GET['tie-envato-authorize'] ) && isset( $_GET['item'] ) && $_GET['item'] == TIELABS_THEME_ID ){
+			if( isset( $_GET['item'] ) && $_GET['item'] == TIELABS_THEME_ID ){
 
 				if( isset( $_GET['sucess'] ) && ! empty( $_GET['token'] ) ){
 
