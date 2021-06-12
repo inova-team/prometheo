@@ -176,17 +176,6 @@
 			}
 		}
 
-
-		// Sale badge in the Single Product Page
-		span.onsale{
-			@include breakpoint(max_min_sm){
-				position: absolute;
-				z-index: 2;
-				top: .875em;
-				left: .875em;
-			}
-		}
-
 		// product slider
 		.woocommerce-product-gallery{
 			width: 45%;
@@ -264,10 +253,6 @@
 						display:inline-block;
 						margin:0;
 						vertical-align:top;
-
-						@include breakpoint(max_min_sm){
-							width: 100%;
-						}
 					}
 				}
 			}
@@ -761,7 +746,7 @@
 
 
 	.products {
-		//overflow: hidden;
+		overflow: hidden;
 		margin-bottom: -30px;
 
 		+ ul{
@@ -773,7 +758,6 @@
 			width: 30.736%;
 			margin-right: 3.896%;
 			margin-bottom: 30px;
-			position: relative;
 
 			&.last{
 				margin-right: 0;
@@ -3176,20 +3160,6 @@ p.order-again {
 				float: left;
 				margin-left: 0;
 			}
-
-			.woocommerce-product-gallery__trigger {
-				right: auto;
-				left: .875em;
-			}
-
-			// Sale badge in the Single Product Page
-			span.onsale{
-				@include breakpoint(max_min_sm){
-					left: auto;
-					right: .875em;
-				}
-			}
-
 		}
 
 		&.single-product{
@@ -3497,7 +3467,7 @@ p.order-again {
 						a {
 							right: 5px;
 							left: auto;
-							//text-indent: 999px !important;
+							text-indent: 999px !important;
 						}
 					}
 

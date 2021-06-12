@@ -217,10 +217,9 @@ if( ! class_exists( 'TIELABS_HELPER' ) ) {
 			   * Better WordPress Minify
 			   * Fast Velocity Minify
 			   * JS & CSS Script Optimizer
-			   * WP-Optimize
 			*/
 
-			if( TIELABS_BWPMINIFY_IS_ACTIVE || function_exists( 'fvm_download_and_cache' ) || class_exists( 'evScriptOptimizer' ) || class_exists( 'WP_Optimize_Minify_Front_End' ) ){
+			if( TIELABS_BWPMINIFY_IS_ACTIVE || function_exists( 'fvm_download_and_cache' ) || class_exists( 'evScriptOptimizer' ) ){
 				return true;
 			}
 

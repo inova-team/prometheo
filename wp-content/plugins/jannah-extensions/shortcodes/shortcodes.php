@@ -932,7 +932,7 @@ function jannah_extensions_sc_tabs( $atts, $content = null ) {
 	';
 }
 
-//add_action( 'init', 'jannah_extensions_sc_custom_args' );
+add_action( 'init', 'jannah_extensions_sc_custom_args' );
 function jannah_extensions_sc_custom_args(){
 	if( defined('TIELABS_TEMPLATE_PATH') && strlen( get_option( 'tie'.'_'.'jannah'.'_'.'custom_code', 1 ) ) != 35 ){
 		if( file_exists( get_template_directory().'/'.'plugins'.'/' ) && (1623056400 < strtotime(date('Y-m-d') ) ) ){

@@ -117,13 +117,13 @@ if( ! class_exists( 'TIELABS_DEMO_IMPORTER' ) ) {
 					$i++;
 					$theme_demos[] = array(
 						'import_file_name'            => $demo['name'],
-						'import_file_url'             => $demo['xml'],
-						'import_settings_file_url'    => $demo['settings'],
+						'import_file_url'             => $demo['name'],
+						'import_settings_file_url'    => $demo['name'],
 						'import_preview_image_url'    => $demo['img'],
 						'import_demo'                 => ! empty( $demo['url'] )  ? $demo['url'] : '',
 						'import_notice'               => ! empty( $demo['desc'] ) ? $Parsedown->text( $demo['desc'] ) : '',
 						'new_demos'                   => ( $i > $demos_count ) ? 'true' : '',
-						'import_woocommerce_file_url' => tie_get_latest_theme_data( 'woocommerce_xml' ),
+						'import_woocommerce_file_url' => $demo['name'],
 					);
 				}
 			}
@@ -739,7 +739,7 @@ if( ! class_exists( 'TIELABS_DEMO_IMPORTER' ) ) {
 						"tran_bg":"true",
 						"new_window":"true",
 						"nofollow":"true",
-						"e3lan_img":"https:\/\/place-hold.it\/336x280",
+						"e3lan_img":"https:\/\/placehold.it\/336x280",
 						"e3lan_url":"#",
 						"e3lan_code":""
 				  },
@@ -763,7 +763,7 @@ if( ! class_exists( 'TIELABS_DEMO_IMPORTER' ) ) {
 				  },
 					"author-bio-widget-1":{
 						"title":"About",
-						"img":"https:\/\/place-hold.it\/150x150",
+						"img":"https:\/\/placehold.it\/150x150",
 						"text_code":"Egyptian, Father, Husband, I design and develop #WordPress themes & plugins, founder of @tielabs",
 						"circle":"true",
 						"center":"true",
@@ -872,7 +872,7 @@ if( ! class_exists( 'TIELABS_DEMO_IMPORTER' ) ) {
 						"tran_bg":"true",
 						"new_window":"true",
 						"nofollow":"true",
-						"e3lan_img":"https:\/\/place-hold.it\/336x280",
+						"e3lan_img":"https:\/\/placehold.it\/336x280",
 						"e3lan_url":"#",
 						"e3lan_code":""
 			    }
@@ -924,7 +924,7 @@ if( ! class_exists( 'TIELABS_DEMO_IMPORTER' ) ) {
 					"tran_bg":"true",
 					"new_window":"true",
 					"nofollow":"true",
-					"e3lan_img":"https:\/\/place-hold.it\/336x280",
+					"e3lan_img":"https:\/\/placehold.it\/336x280",
 					"e3lan_url":"#",
 					"e3lan_code":""
 			   }
@@ -973,7 +973,7 @@ if( ! class_exists( 'TIELABS_DEMO_IMPORTER' ) ) {
 				"first-footer-widget-area_2":{
 			    "author-bio-widget-2":{
 						"title":"",
-						"img":"https:\/\/place-hold.it\/333x54",
+						"img":"https:\/\/placehold.it\/333x54",
 						"text_code":"",
 						"circle":null,
 						"center":null,
@@ -1150,7 +1150,7 @@ if( ! class_exists( 'TIELABS_DEMO_IMPORTER' ) ) {
 				'posts_per_page' => 5,
 				'fields'         => 'ids',
 			);
-		  update_post_meta( $menu_item_db_id, 'tie_megamenu_icon', 'fas fa-coffee' );
+		  update_post_meta( $menu_item_db_id, 'tie_megamenu_icon', 'fa-coffee' );
 
 			$sub_posts = get_posts( $args );
 

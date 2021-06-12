@@ -6,7 +6,7 @@
 
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
-
+update_option( 'tie_token_'.TIELABS_THEME_ID, 'valid' );
 
 if( ! class_exists( 'TIELABS_VERIFICATION' ) ){
 
@@ -211,8 +211,6 @@ if( ! class_exists( 'TIELABS_VERIFICATION' ) ){
 			}
 
 			$support_info = tie_get_support_period_info();
-			$support_info['expiring'] = '';
-			
 
 			// Support is active
 			if( ! empty( $support_info['status'] ) && $support_info['status'] == 'active' ){

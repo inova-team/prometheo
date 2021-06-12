@@ -20,9 +20,9 @@ $window.on( 'load', function() {
 		$pageTemplateAttr = '.editor-page-attributes__template select';
 	}
 
-	var selected_item = jQuery( $pageTemplateAttr ).val();
-
 	console.log( 'Page Template Attr: '+ $pageTemplateAttr );
+
+	var selected_item = jQuery( $pageTemplateAttr ).val();
 
 	if ( selected_item == 'template-masonry.php' ){
 		jQuery('#tie-page-template-categories').show();
@@ -31,21 +31,16 @@ $window.on( 'load', function() {
 		jQuery('#tie-page-template-authors').show();
 	}
 
-	setTimeout(function() {
-
-		jQuery($pageTemplateAttr).change(function(){
-
-			var selected_item = jQuery($pageTemplateAttr).val();
-			jQuery('.tie-page-templates-options').hide();
-			if ( selected_item == 'template-masonry.php' ){
-				jQuery('#tie-page-template-categories').show();
-			}
-			else if ( selected_item == 'template-authors.php' ){
-				jQuery('#tie-page-template-authors').show();
-			}
-		});
-
-	},500);
+	jQuery($pageTemplateAttr).change(function(){
+		var selected_item = jQuery($pageTemplateAttr).val();
+		jQuery('.tie-page-templates-options').hide();
+		if ( selected_item == 'template-masonry.php' ){
+			jQuery('#tie-page-template-categories').show();
+		}
+		else if ( selected_item == 'template-authors.php' ){
+			jQuery('#tie-page-template-authors').show();
+		}
+	});
 
 
 	jQuery('.option-item').find('.CodeMirror').each(function(i, el){
