@@ -258,8 +258,8 @@ if( ! class_exists( 'TIELABS_AJAX' ) ) {
 		function mega_menu(){
 
 			$block = array(
-				'id'     => $_REQUEST['id'],
-				'number' => $_REQUEST['number'],
+				'id'     => esc_html( $_REQUEST['id'] ),
+				'number' => esc_html( $_REQUEST['number'] ),
 			);
 
 			$block = apply_filters( 'TieLabs/mega_menu/posts_query/args', $block );
@@ -322,7 +322,7 @@ if( ! class_exists( 'TIELABS_AJAX' ) ) {
 		 */
 		function live_search(){
 
-			$search_qry	= $_REQUEST['query'];
+			$search_qry	= sanitize_text_field( $_REQUEST['query'] );
 
 			$supported_post_types = array( 'post' );
 			$exclude_post_types   = tie_get_option( 'search_exclude_post_types' );
@@ -370,9 +370,9 @@ if( ! class_exists( 'TIELABS_AJAX' ) ) {
 				}
 
 				$search_json['suggestions'][] = array(
-					'layout'   => '<div class="widget-post-list"><a class="button fullwidth" href="'. esc_url(home_url('?s=' . urlencode( $search_qry ) )) .'">'. esc_html__( 'View all results', TIELABS_TEXTDOMAIN ) .'</a></div>',
+					'layout'   => '<div class="widget-post-list"><a class="button fullwidth" href="'. esc_url( home_url('?s=' . urlencode( $search_qry ) ) ) .'">'. esc_html__( 'View all results', TIELABS_TEXTDOMAIN ) .'</a></div>',
 					'value'    => $search_qry,
-					'url'      => esc_url(home_url('?s=' . urlencode( $search_qry ))),
+					'url'      => esc_url( home_url('?s=' . urlencode( $search_qry )) ),
 				);
 
 			}
@@ -399,8 +399,6 @@ if( ! class_exists( 'TIELABS_AJAX' ) ) {
 			else{
 				$ip = $_SERVER['REMOTE_ADDR'];
 			}
-
-			//$ip = '3.97.255.255';
 
 			if( ! empty( $ip ) ){
 

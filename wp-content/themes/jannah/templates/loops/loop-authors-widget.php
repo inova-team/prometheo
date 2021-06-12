@@ -41,7 +41,7 @@ $display_name = tie_get_the_author( $author );
 			$no_thumb = '';
 			?>
 			<div class="post-widget-thumbnail" style="width:70px">
-				<a class="author-avatar" href="<?php echo $profile; ?>">
+				<a class="author-avatar" href="<?php echo esc_url( $profile ); ?>">
 					<?php echo tie_get_author_avatar( $author, 70 ); ?>
 				</a>
 			</div>

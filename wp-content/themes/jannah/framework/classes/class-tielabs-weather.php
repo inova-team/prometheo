@@ -39,13 +39,13 @@ if( ! class_exists( 'TIELABS_WEATHER' ) ) {
 
 			$this->atts           = $atts;
 			$this->api_key        = TIELABS_HELPER::remove_spaces( tie_get_option( 'api_openweather' ) );
-			$this->location       = $this->atts['location'];
+			$this->location       = sanitize_text_field( $this->atts['location'] );
 			$this->locale         = $this->get_locale();
 			$this->city_slug      = is_numeric( $this->location ) ? $this->location : sanitize_title( $this->location );
 			$this->units          = ( isset( $atts['units'] ) AND strtoupper( $atts['units'] ) == 'C' ) ? 'metric' : 'imperial';
 			$this->units_display  = $this->units == 'metric' ? '&#x2103;' : '&#x2109;';
 			$this->transient_name = 'tie_weather_' . $this->city_slug . '_' . strtolower( $this->units ) . '_' . $this->locale;
-			$this->days_to_show   = isset( $this->atts['forecast_days'] ) ? $this->atts['forecast_days'] : 5;
+			$this->days_to_show   = isset( $this->atts['forecast_days'] ) ? sanitize_text_field( $this->atts['forecast_days'] ) : 5;
 
 			$this->avoid_cache    = isset( $this->atts['avoid_cache'] ) ? true : false;
 
@@ -67,7 +67,7 @@ if( ! class_exists( 'TIELABS_WEATHER' ) ) {
 
 			$output      = '';
 			$today       = $weather_data['now'];
-			$city_name   = ! empty( $this->atts['custom_name'] ) ? $this->atts['custom_name']   : $today->name;
+			$city_name   = ! empty( $this->atts['custom_name'] ) ? sanitize_text_field( $this->atts['custom_name'] ) : $today->name;
 			$is_animated = ! empty( $this->atts['animated'] )    ? 'is-animated'                : '';
 			$speed_text  = ( $this->units == 'metric')           ? esc_html__( 'km/h', TIELABS_TEXTDOMAIN ) : esc_html__( 'mph', TIELABS_TEXTDOMAIN );
 			$weather_id  = ! empty( $today->weather[0]->id )     ? $today->weather[0]->id : 800;
@@ -88,7 +88,7 @@ if( ! class_exists( 'TIELABS_WEATHER' ) ) {
 			// Display the weather | NORMAL LAYOUT
 			if( empty( $this->atts['compact'] ) ){ ?>
 
-				<div id="tie-weather-<?php echo $this->city_slug ?>" class="weather-wrap <?php echo $is_animated ?>">
+				<div id="tie-weather-<?php echo esc_attr( $this->city_slug ) ?>" class="weather-wrap <?php echo esc_attr( $is_animated ) ?>">
 
 					<div class="weather-icon-and-city">
 						<?php echo $the_icon; ?>
@@ -123,7 +123,7 @@ if( ! class_exists( 'TIELABS_WEATHER' ) ) {
 					</div> <!-- /.weather-todays-stats -->
 
 					<?php if( $this->days_to_show != 'hide' ){ ?>
-						<div class="weather-forecast small-weather-icons weather_days_<?php echo $this->days_to_show ?>">
+						<div class="weather-forecast small-weather-icons weather_days_<?php echo esc_attr( $this->days_to_show ) ?>">
 							<?php echo $forecast_out ?>
 						</div><!-- /.weather-forecast -->
 					<?php } ?>
@@ -136,7 +136,7 @@ if( ! class_exists( 'TIELABS_WEATHER' ) ) {
 			// Display the weather | Comapct LAYOUT
 			else{ ?>
 
-				<div class="tie-weather-widget <?php echo $is_animated ?>" title="<?php echo $description ?>">
+				<div class="tie-weather-widget <?php echo esc_attr( $is_animated ) ?>" title="<?php echo esc_html( $description ) ?>">
 					<div class="weather-wrap">
 
 						<div class="weather-forecast-day small-weather-icons">

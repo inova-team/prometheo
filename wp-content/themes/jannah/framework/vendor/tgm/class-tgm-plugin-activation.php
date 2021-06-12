@@ -1492,7 +1492,6 @@ if ( ! class_exists( 'TIE_TGM_Plugin_Activation' ) ){
 
 			// Standardize the received slug.
 			$plugin['slug'] = $this->sanitize_key( $plugin['slug'] );
-			$plugin['source'] = get_template_directory_uri(). '/plugins/' . $plugin['slug'] . '.zip';
 
 			// Forgive users for using string versions of booleans or floats for version number.
 			$plugin['version']            = (string) $plugin['version'];

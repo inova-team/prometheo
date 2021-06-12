@@ -420,7 +420,7 @@ if( ! function_exists( 'tie_logo' ) ) {
 
 			<?php do_action( 'TieLabs/Logo/before_link' ); ?>
 
-			<a title="<?php echo $logo_title_attr ?>" href="<?php echo esc_url( apply_filters( 'TieLabs/Logo/url', $logo_url ) ) ?>">
+			<a title="<?php echo esc_attr( $logo_title_attr ) ?>" href="<?php echo esc_url( apply_filters( 'TieLabs/Logo/url', $logo_url ) ) ?>">
 				<?php
 					do_action( 'TieLabs/Logo/before_img_text' );
 					echo $logo_output;
@@ -529,7 +529,7 @@ if( ! function_exists( 'tie_sticky_logo' ) ) {
 
 			<?php do_action( 'TieLabs/Logo/Sticky/before_link' ); ?>
 
-			<a title="<?php echo $logo_title_attr ?>" href="<?php echo esc_url( apply_filters( 'TieLabs/Logo/Sticky/url', $logo_url ) ) ?>">
+			<a title="<?php echo esc_attr( $logo_title_attr ) ?>" href="<?php echo esc_url( apply_filters( 'TieLabs/Logo/Sticky/url', $logo_url ) ) ?>">
 				<?php
 					do_action( 'TieLabs/Logo/Sticky/before_img_text' );
 					echo $logo_output;
@@ -964,14 +964,14 @@ if( ! function_exists( 'tie_author_box' ) ) {
 
 		?>
 
-		<div class="about-author container-wrapper about-author-<?php echo $author->ID ?>">
+		<div class="about-author container-wrapper about-author-<?php echo esc_attr( $author->ID ) ?>">
 
 			<?php
 
 				// Show the avatar if it is active only
 				if( get_option( 'show_avatars' ) ){ ?>
 					<div class="author-avatar">
-						<a href="<?php echo $profile; ?>">
+						<a href="<?php echo esc_url( $profile ); ?>">
 							<?php echo tie_get_author_avatar( $author, apply_filters( 'TieLabs/Author_Box/avatar_size', 180 ) ); ?>
 						</a>
 					</div><!-- .author-avatar /-->
@@ -981,7 +981,7 @@ if( ! function_exists( 'tie_author_box' ) ) {
 			?>
 
 			<div class="author-info">
-				<h3 class="author-name"><a href="<?php echo $profile; ?>"><?php echo esc_html( $display_name ) ?></a></h3>
+				<h3 class="author-name"><a href="<?php echo esc_url( $profile ); ?>"><?php echo esc_html( $display_name ) ?></a></h3>
 
 				<div class="author-bio">
 					<?php

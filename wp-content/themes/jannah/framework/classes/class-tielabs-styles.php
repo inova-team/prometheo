@@ -1069,27 +1069,30 @@ if( ! class_exists( 'TIELABS_STYLES' ) ) {
 
 			$out = '';
 
-			// Define the ID
-			$id_css = '#tie-' .$block['boxid'];
+			if( ! empty( $block['boxid'] ) ){
 
-			// Check if the block has a custom bg
-			if( ! empty( $block['color'] ) ){
-				$color  = $block['color'];
-				$darker = self::color_brightness( $color );
-				$bright = self::light_or_dark( $color );
+				// Define the ID
+				$id_css = '#tie-' . $block['boxid'];
 
-				$out .= apply_filters( 'TieLabs/CSS/Builder/block_style', '', $id_css, $block, $color, $bright, $darker );
-			}
-
-			// Check if the block has a custom bgcolor
-			if( ! empty( $block['bgcolor'] ) && empty( $block['content_only'] ) ){
-
-				if( $block['style'] != 'ad_50' && $block['style'] != 'ad' && $block['style'] != 'videos_list' && strpos( $block['style'], 'slider_' ) === false  ){
-					$color  = $block['bgcolor'];
+				// Check if the block has a custom bg
+				if( ! empty( $block['color'] ) ){
+					$color  = $block['color'];
 					$darker = self::color_brightness( $color );
-					$bright = ! empty( $block['sec_color'] ) ? $block['sec_color'] : self::light_or_dark( $color );
+					$bright = self::light_or_dark( $color );
 
-					$out .= apply_filters( 'TieLabs/CSS/Builder/block_bg', '', $id_css, $block, $color, $bright, $darker );
+					$out .= apply_filters( 'TieLabs/CSS/Builder/block_style', '', $id_css, $block, $color, $bright, $darker );
+				}
+
+				// Check if the block has a custom bgcolor
+				if( ! empty( $block['bgcolor'] ) && empty( $block['content_only'] ) ){
+
+					if( $block['style'] != 'ad_50' && $block['style'] != 'ad' && $block['style'] != 'videos_list' && strpos( $block['style'], 'slider_' ) === false  ){
+						$color  = $block['bgcolor'];
+						$darker = self::color_brightness( $color );
+						$bright = ! empty( $block['sec_color'] ) ? $block['sec_color'] : self::light_or_dark( $color );
+
+						$out .= apply_filters( 'TieLabs/CSS/Builder/block_bg', '', $id_css, $block, $color, $bright, $darker );
+					}
 				}
 			}
 

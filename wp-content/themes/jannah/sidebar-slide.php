@@ -38,7 +38,7 @@ $classes = join( ' ', apply_filters( 'TieLabs/slide_sidebar/classes', array_filt
 // --
 if( $slide_sidebar_desktop || $slide_sidebar_mobile ) : ?>
 
-	<aside class=" <?php echo $classes ?>" aria-label="<?php esc_html_e( 'Secondary Sidebar', TIELABS_TEXTDOMAIN ); ?>" style="visibility: hidden;">
+	<aside class=" <?php echo esc_attr( $classes ) ?>" aria-label="<?php esc_html_e( 'Secondary Sidebar', TIELABS_TEXTDOMAIN ); ?>" style="visibility: hidden;">
 		<div data-height="100%" class="side-aside-wrapper has-custom-scroll">
 
 			<a href="#" class="close-side-aside remove big-btn light-btn">

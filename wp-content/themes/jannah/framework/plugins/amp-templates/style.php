@@ -279,7 +279,7 @@ blockquote p:last-child {
 
 .amp-wp-article-content {
 	margin: 0 16px;
-	font-size: <?php echo $post_font_size; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
+	font-size: <?php echo esc_html( $post_font_size ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
 	line-height: 1.75;
 }
 
@@ -615,7 +615,7 @@ amp-carousel {
 <?php endif; ?>
 
 .hamburgermenu {
-	float: <?php echo $menu_position; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
+	float: <?php echo esc_html( $menu_position ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
 	position: relative;
 	z-index: 9999;
 	margin-top: 8px;
@@ -698,7 +698,7 @@ amp-sidebar {
 .amp-menu li.menu-item-has-children ul {
 	display: none;
 	margin: 0;
-	padding-<?php echo $menu_position; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>: 15px;
+	padding-<?php echo esc_html( $menu_position ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>: 15px;
 }
 
 .amp-menu li.menu-item-has-children:hover>ul {

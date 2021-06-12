@@ -1478,10 +1478,20 @@ a.author-avatar:hover {
 
 
 // Audio Player ------------------------------------------------
-.wp-video-shortcode,
-.wp-video {
-	width: 100% !important;
-	height: auto !important;
+div:not(.tie-ignore-fitvid) > {
+	.wp-video-shortcode,
+	.wp-video {
+		width: 100% !important;
+		height: auto !important;
+	}
+}
+
+.tie-ignore-fitvid{
+	.wp-video-shortcode,
+	.wp-video {
+		margin-right: auto;
+		margin-left: auto;
+	}
 }
 
 #tie-wrapper .mejs-container{

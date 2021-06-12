@@ -170,7 +170,7 @@ if( ! class_exists( 'TIELABS_POSTVIEWS' ) ) {
 					$new_count = $count + 1;
 					update_post_meta( $post_id, $count_key, $new_count );
 
-					$formated = apply_filters( 'TieLabs/post_views_number', number_format_i18n( $new_count ) );
+					$formated = apply_filters( 'TieLabs/post_views_number', number_format_i18n( (float)$new_count ) );
 					echo '<span class="tie-icon-fire" aria-hidden="true"></span> '. $formated .'</span>';
 				}
 			}
@@ -321,7 +321,7 @@ if( ! class_exists( 'TIELABS_POSTVIEWS' ) ) {
 				}
 			}
 
-			$formated = apply_filters( 'TieLabs/post_views_number', number_format_i18n( $count ) );
+			$formated = apply_filters( 'TieLabs/post_views_number', number_format_i18n( (float)$count ) );
 
 			$output = '<span class="meta-views meta-item '. $views_class .'"><span class="tie-icon-fire" aria-hidden="true"></span> '.$formated.' '.$text.'</span>';
 

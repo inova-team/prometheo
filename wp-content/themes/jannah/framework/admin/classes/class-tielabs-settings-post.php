@@ -522,7 +522,7 @@ if( ! class_exists( 'TIELABS_SETTINGS_POST' ) ) {
 						foreach( $settings_tabs as $tab => $settings ){
 							?>
 
-							<div id="tie-options-tab-<?php echo $tab ?>" class="tabs-wrap">
+							<div id="tie-options-tab-<?php echo esc_attr( $tab ) ?>" class="tabs-wrap">
 								<?php
 
 									do_action( 'TieLabs/Settings/Post/before_'.$tab );

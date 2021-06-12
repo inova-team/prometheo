@@ -134,10 +134,10 @@ if( ! class_exists( 'TIELABS_SETTINGS_CATEGORY' ) ) {
 													$title = $settings['title'];
 													?>
 
-													<li class="tie-tabs tie-options-tab-<?php echo $tab ?>">
-														<a href="#tie-options-tab-<?php echo $tab ?>">
-															<span class="dashicons-before dashicons-<?php echo $icon ?> tie-icon-menu"></span>
-															<?php echo $title; ?>
+													<li class="tie-tabs tie-options-tab-<?php echo esc_attr( $tab ) ?>">
+														<a href="#tie-options-tab-<?php echo esc_attr( $tab ) ?>">
+															<span class="dashicons-before dashicons-<?php echo esc_attr( $icon ) ?> tie-icon-menu"></span>
+															<?php echo esc_html( $title ); ?>
 														</a>
 													</li>
 
@@ -153,7 +153,7 @@ if( ! class_exists( 'TIELABS_SETTINGS_CATEGORY' ) ) {
 											foreach( $settings_tabs as $tab => $settings ){
 												?>
 
-												<div id="tie-options-tab-<?php echo $tab ?>" class="tabs-wrap">
+												<div id="tie-options-tab-<?php echo esc_attr( $tab ) ?>" class="tabs-wrap">
 													<?php
 
 														do_action( 'TieLabs/Settings/Category/before_'.$tab );

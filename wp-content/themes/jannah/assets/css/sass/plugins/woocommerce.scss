@@ -96,6 +96,19 @@
 		}
 	}
 
+	p.stock {
+		font-size: 0.92em;
+		color: #ffffff;
+		padding: 3px 10px;
+		margin-bottom: 20px;
+		border-radius: $base-border-radius;
+		background-color: $success-color;
+		display: inline-block;
+	}
+
+	p.out-of-stock {
+		background-color: $danger-color;
+	}
 
 	div.product{
 		.quantity {
@@ -140,20 +153,6 @@
 			}
 		}
 
-		p.stock {
-			font-size: 0.92em;
-			color: #ffffff;
-			padding: 0 10px;
-			margin-bottom: 20px;
-			border-radius: $base-border-radius;
-			background-color: $success-color;
-			display: inline-block;
-		}
-
-		p.out-of-stock {
-			background-color: $danger-color;
-		}
-
 		.woocommerce-product-rating {
 			float: right;
 			line-height: 22px;
@@ -173,6 +172,17 @@
 				content: "/";
 				margin: 0 5px;
 				pointer-events: none;
+			}
+		}
+
+
+		// Sale badge in the Single Product Page
+		span.onsale{
+			@include breakpoint(max_min_sm){
+				position: absolute;
+				z-index: 2;
+				top: .875em;
+				left: .875em;
 			}
 		}
 
@@ -253,6 +263,10 @@
 						display:inline-block;
 						margin:0;
 						vertical-align:top;
+
+						@include breakpoint(max_min_sm){
+							width: 100%;
+						}
 					}
 				}
 			}
@@ -614,7 +628,8 @@
 
 	li.product{
 		span.onsale,
-		span.new{
+		span.new,
+		.out-of-stock{
 			position: absolute;
 			left: 20px;
 			top: 20px;
@@ -652,7 +667,7 @@
 		}
 	}
 
-	@include breakpoint(670px){
+	@media (min-width: 670px) {
 		ul.products {
 
 			&.columns-1 {
@@ -746,7 +761,7 @@
 
 
 	.products {
-		overflow: hidden;
+		//overflow: hidden;
 		margin-bottom: -30px;
 
 		+ ul{
@@ -758,6 +773,7 @@
 			width: 30.736%;
 			margin-right: 3.896%;
 			margin-bottom: 30px;
+			position: relative;
 
 			&.last{
 				margin-right: 0;
@@ -1063,7 +1079,7 @@
 			background-color: $dark-brand-color;
 			text-decoration: none;
 			background-image: none;
-			color: #ffffff;;
+			color: #ffffff;
 		}
 
 		&.alt {
@@ -3160,6 +3176,20 @@ p.order-again {
 				float: left;
 				margin-left: 0;
 			}
+
+			.woocommerce-product-gallery__trigger {
+				right: auto;
+				left: .875em;
+			}
+
+			// Sale badge in the Single Product Page
+			span.onsale{
+				@include breakpoint(max_min_sm){
+					left: auto;
+					right: .875em;
+				}
+			}
+
 		}
 
 		&.single-product{
@@ -3467,7 +3497,7 @@ p.order-again {
 						a {
 							right: 5px;
 							left: auto;
-							text-indent: 999px !important;
+							//text-indent: 999px !important;
 						}
 					}
 

@@ -8,7 +8,7 @@
  * will need to copy the new files to your child theme to maintain compatibility.
  *
  * @author   TieLabs
- * @version  4.0.0
+ * @version  5.4.0
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
@@ -26,8 +26,12 @@ $no_thumb = ! has_post_thumbnail() ? ' no-small-thumbs' : '';
 
 			<div class="post-thumbnail">
 				<a class="post-thumb" href="<?php the_permalink(); ?>">
-					<?php tie_post_format_icon( $media_icon ); ?>
-					<?php the_post_thumbnail( $thumbnail ) ?>
+					<?php
+						tie_post_format_icon( $media_icon );
+
+						$thumbnail_size = apply_filters( 'TieLabs/loop_thumbnail_size', $thumbnail, 'mega-menu-default' );
+						the_post_thumbnail( $thumbnail_size );
+					?>
 				</a>
 			</div><!-- .post-thumbnail /-->
 			<?php

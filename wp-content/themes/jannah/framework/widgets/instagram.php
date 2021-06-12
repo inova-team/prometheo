@@ -131,7 +131,7 @@ if( ! class_exists( 'TIE_INSTAGRAM_WIDGET' ) ) {
 			}
 
 			?>
-			<div style="display:<?php echo $show_insta_settings ?>">
+			<div style="display:<?php echo esc_attr( $show_insta_settings ) ?>">
 				<p>
 					<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', TIELABS_TEXTDOMAIN) ?></label>
 					<input id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" class="widefat" type="text" />
