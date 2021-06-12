@@ -14,7 +14,7 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
 
 // Prepare the posts settings
-$b_args = array(
+$b_args = apply_filters( 'TieLabs/archives/args', array(
 	'uncropped_image' => isset( $uncropped_image ) ? $uncropped_image : TIELABS_THEME_SLUG.'-image-post',
 	'category_meta'   => isset( $category_meta )   ? $category_meta   : true,
 	'post_meta'       => isset( $post_meta )       ? $post_meta       : true,
@@ -26,7 +26,7 @@ $b_args = array(
 	'title_length'    => 0,
 	'is_full'         => ! TIELABS_HELPER::has_sidebar(),
 	'is_category'     => is_category(),
-);
+) );
 
 $count    = 0;
 $settings = str_replace( '"', '\'', wp_json_encode( $b_args ));

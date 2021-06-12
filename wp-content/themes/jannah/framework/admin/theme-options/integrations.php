@@ -85,7 +85,7 @@ else{
 			}
 		?>
 
-		<a id="tie-connect-instagram" href="<?php echo tielabs_instagram_feed()->api->authorize() ?>" class="tie-primary-button button <?php echo $button_class; ?> tie-has-custom-action"><?php echo $button_text; ?></a>
+		<a id="tie-connect-instagram" href="<?php echo tielabs_instagram_feed()->api->authorize() ?>" class="tie-primary-button button <?php echo esc_attr( $button_class ); ?> tie-has-custom-action"><?php echo $button_text; ?></a>
 		<input type="hidden" name="tie-connect-instagram-link" id="tie-connect-instagram-link" />
 	</div>
 

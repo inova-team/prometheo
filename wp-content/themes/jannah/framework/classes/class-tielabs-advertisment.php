@@ -409,8 +409,11 @@ if( ! class_exists( 'TIELABS_ADVERTISMENT' ) ) {
 		 * Ad Blocker
 		 */
 		function ad_blocker(){
-
 			?>
+				<div class="adsbygoogle Ad-Container sidebar-ad">
+					<div style="z-index:-1; height:0; width:1px; visibility: hidden; bottom: -1px; left: 0;"></div>
+				</div>
+
 				<div id="tie-popup-adblock" class="tie-popup is-fixed-popup">
 					<div class="tie-popup-container">
 						<div class="container-wrapper">

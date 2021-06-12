@@ -246,9 +246,13 @@ if( ! class_exists( 'TIELABS_AMP' ) ) {
 
 							while ( $recent_posts->have_posts() ){
 								$recent_posts->the_post();
+
+								$related_post_id  = get_the_ID();
+								$related_post_url = apply_filters( 'TieLabs/AMP/related_posts/post_url', amp_get_permalink( $related_post_id ), $related_post_id );
+
 								$output .= '
 									<li>
-										<a href="' . amp_get_permalink( get_the_ID() ) . '">'. get_the_post_thumbnail( null, TIELABS_THEME_SLUG.'-image-large' ) . get_the_title() .'</a>
+										<a href="'. $related_post_url .'">'. get_the_post_thumbnail( null, TIELABS_THEME_SLUG.'-image-large' ) . get_the_title() .'</a>
 									</li>';
 							}
 
@@ -381,7 +385,7 @@ if( ! class_exists( 'TIELABS_AMP' ) ) {
 
 			$menu_position = tie_get_option( 'amp_menu_position', 'left' ) == 'left' ? 'left' : 'right';
 			?>
-			<amp-sidebar id='sidebar' layout="nodisplay" side="<?php echo $menu_position ?>">
+			<amp-sidebar id='sidebar' layout="nodisplay" side="<?php echo esc_attr( $menu_position ) ?>">
 				<div class="toggle-navigationv2">
 					<div role="button" tabindex="0" on="tap:sidebar.close" class="close-nav">X</div>
 					<nav id ="primary-amp-menu" itemscope="" itemtype="https://schema.org/SiteNavigationElement">

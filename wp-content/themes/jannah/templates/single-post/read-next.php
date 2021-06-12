@@ -42,7 +42,7 @@ if( (( tie_get_option( 'read_next' ) && ! tie_get_postdata( 'tie_hide_read_next'
 
 	?>
 
-	<div id="read-next-block" class="container-wrapper read-next-slider-<?php echo $style ?>">
+	<div id="read-next-block" class="container-wrapper read-next-slider-<?php echo esc_attr( $style ) ?>">
 		<h2 class="read-next-block-title"><?php esc_html_e( 'Read Next', TIELABS_TEXTDOMAIN ); ?></h2>
 		<?php
 			TIELABS_HELPER::get_template_part( 'templates/featured', '', array(

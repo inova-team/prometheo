@@ -6,7 +6,7 @@
 
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
-update_option( 'tie_token_'.TIELABS_THEME_ID, 'valid' );
+
 
 if( ! class_exists( 'TIELABS_VERIFICATION' ) ){
 
@@ -18,7 +18,7 @@ if( ! class_exists( 'TIELABS_VERIFICATION' ) ){
 		 */
 		function __construct() {
 
-			//add_action( 'admin_enqueue_scripts',          array( $this, 'load_notices' ) );
+			add_action( 'admin_enqueue_scripts',          array( $this, 'load_notices' ) );
 			add_filter( 'TieLabs/welcome_splash_content', array( $this, 'theme_registerantion_section' ), 9 );
 		}
 
@@ -52,7 +52,7 @@ if( ! class_exists( 'TIELABS_VERIFICATION' ) ){
 				return;
 			}
 
-			if( isset( $_GET['item'] ) && $_GET['item'] == TIELABS_THEME_ID ){
+			if( isset( $_GET['tie-envato-authorize'] ) && isset( $_GET['item'] ) && $_GET['item'] == TIELABS_THEME_ID ){
 
 				if( isset( $_GET['sucess'] ) && ! empty( $_GET['token'] ) ){
 

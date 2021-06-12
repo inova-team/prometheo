@@ -843,7 +843,7 @@ if( ! class_exists( 'TIELABS_SETTINGS' ) ) {
 								}
 								?>
 
-								<option value="<?php echo $option_key ?>" <?php echo $selected ?>><?php echo $option ?></option>
+								<option value="<?php echo esc_attr( $option_key ) ?>" <?php echo $selected ?>><?php echo $option ?></option>
 
 								<?php
 							}

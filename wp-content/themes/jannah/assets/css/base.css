@@ -291,7 +291,8 @@ p {
 }
 
 .says,
-.screen-reader-text {
+.screen-reader-text,
+.comment-form-comment label {
   clip: rect(1px, 1px, 1px, 1px);
   position: absolute !important;
   height: 1px;
@@ -301,7 +302,7 @@ p {
 
 .stream-title {
   margin-bottom: 3px;
-  font-size: 85%;
+  font-size: 11px;
   color: #a5a5a5;
   display: block;
 }

@@ -694,7 +694,7 @@ if( ! empty( $slider_settings ) ){
 						}
 						?>
 
-						<div class="<?php echo $nav_slider_class ?> ">
+						<div class="<?php echo esc_attr( $nav_slider_class ) ?> ">
 							<ul class="tie-slider-nav"></ul>
 
 							<div class="container">
@@ -709,7 +709,7 @@ if( ! empty( $slider_settings ) ){
 													extract( $single_slide );
 													$count ++; ?>
 
-													<div class="slide tie-slide-<?php echo $count ?>">
+													<div class="slide tie-slide-<?php echo esc_attr( $count ) ?>">
 														<div class="slide-overlay">
 
 															<?php

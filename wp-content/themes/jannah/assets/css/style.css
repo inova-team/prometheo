@@ -2889,10 +2889,16 @@ ul:not(.solid-social-icons) .social-icons-item a:not(:hover) {
   height: 100%;
 }
 
-.wp-video-shortcode,
-.wp-video {
+div:not(.tie-ignore-fitvid) > .wp-video-shortcode,
+div:not(.tie-ignore-fitvid) > .wp-video {
   width: 100% !important;
   height: auto !important;
+}
+
+.tie-ignore-fitvid .wp-video-shortcode,
+.tie-ignore-fitvid .wp-video {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #tie-wrapper .mejs-container .mejs-controls {

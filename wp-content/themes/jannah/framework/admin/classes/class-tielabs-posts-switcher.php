@@ -212,7 +212,7 @@ if( ! class_exists( 'TIELABS_POSTS_SWITCHER' ) ) {
 
 				// is the theme activated
 				if( ! get_option( 'tie_token_'.TIELABS_THEME_ID ) ){
-					TIELABS_VERIFICATION::authorize_notice( true );
+					TIELABS_VERIFICATION::authorize_notice( false );
 				}
 
 				// Is the Switcher plugin active

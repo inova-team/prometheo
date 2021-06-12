@@ -829,78 +829,226 @@ function tie_save_user_profile_custom_options( $user_id ){
 /*-----------------------------------------------------------------------------------*/
 function tie_get_latest_theme_data( $key = '', $token = false, $force_update = false, $update_files = false, $revoke = false ){
 
-	# Options and vars
-	$cache_field     = 'tie-data-'.TIELABS_THEME_SLUG;
-	$plugins_field   = 'tie-plugins-data-'.TIELABS_THEME_SLUG;
-	$token_key       = 'tie_token_'.TIELABS_THEME_ID;
-	$token_error_key = 'tie_token_error_'.TIELABS_THEME_ID;
-
-
-	if( $update_files && ! get_transient( $plugins_field ) ){
-		delete_transient( $cache_field );
+	// Check the current user role
+	if( ! function_exists( 'current_user_can' ) || ( function_exists( 'current_user_can' ) && ! current_user_can( 'manage_options' ) ) ){
+		return false;
 	}
 
-	# Use the given $token and force update the TieLabs data from Envato ----------
+	$cache_key        = 'tie-data-'.TIELABS_THEME_SLUG;
+	$plugins_field    = 'tie-plugins-data-'.TIELABS_THEME_SLUG;
+	$token_key        = 'tie_token_'.TIELABS_THEME_ID;
+	$token_error_key  = 'tie_token_error_'.TIELABS_THEME_ID;
+	$server_error_key = 'tie_server_error_'.TIELABS_THEME_ID;
+
+	$request_url      = 'https://tielabs.com/wp-json/api/v1/get';
+
+	// Stored Cache
+	$cached_data = get_option( $cache_key );
+
+	// Update Plugins Paths
+	if( $update_files && ! get_transient( $plugins_field ) ){
+		$update = true;
+	}
+
+	// Use the given $token and force update the TieLabs data from Envato
 	if( $token !== false ){
-		delete_transient( $cache_field );
+
+		$update       = true;
 		$force_update = true;
 		$update_files = true;
+
+		delete_option( $token_error_key );
+		delete_transient( $server_error_key );
 	}
-	# Get data by the stored token ----------
+
+	// Revoke the theme
+	elseif( $revoke !== false || $force_update !== false ){
+
+		$token = get_option( $token_key );
+
+		// --
+		$update = true;
+		delete_option( $token_error_key );
+		delete_transient( $server_error_key );
+	}
+
+	// Get data by the stored token
 	else{
-		$cached_data = get_transient( $cache_field );
+
+		// No cached data
+		if( empty( $cached_data ) ){
+			$update = true;
+		}
+
+		// Check if cache is expired
+		else{
+			$timeout = get_option( $cache_key.'_timeout' );
+
+			 if ( false === $timeout || ( false !== $timeout && $timeout < time() ) ) {
+				$update = true;
+			}
+		}
+
+		// API Token
 		$token = get_option( $token_key );
 	}
 
-	# Get the Cached data ----------
-	if( empty( $cached_data ) && ! empty( $token )){
-		$latest_data_filename = get_template_directory().'/framework/admin/latest-theme-data.json';
-		$cached_data = file_get_contents( $latest_data_filename );
-		$cached_data = json_decode( $cached_data, true );
+	// debug
+	//$update = true;
+	//delete_transient( $server_error_key );
+	//delete_option( $token_error_key );
 
+	// We need to update the data, Get the Cached data
+	if( isset( $update ) && ! empty( $token ) && ! get_option( $token_error_key ) && ! get_transient( $server_error_key ) ){
 
-		if( ! empty( $cached_data['status'] ) && $cached_data['status'] == 1 ){
+		$body = array(
+			'tie_token'      => $token,
+			'item_id'        => TIELABS_THEME_ID,
+			'force_update'   => $force_update,
+			'update_files'   => $update_files,
+			'revoke_theme'   => $revoke,
+			'theme_version'  => TIELABS_DB_VERSION,
+			'blog_url'       => esc_url( home_url( '/' ) ),
+			'php_version'    => phpversion(),
+			'local'          => get_locale(),
+			'wp_version'     => get_bloginfo( 'version' ),
+			'demo_installed' => get_option( 'tie_installed_demo_'. TIELABS_THEME_ID ),
+			'is_switched'    => get_option( 'tie_switch_to_'. TIELABS_THEME_ID ),
+			'active_plugins' => get_option( 'active_plugins' ),
+		);
 
-			delete_option( $token_error_key );
+		// Social
+		if( function_exists( 'arq_counters_data' ) ) {
+			$arq_counters = arq_counters_data();
+		}
+		elseif( class_exists( 'ARQAM_LITE_COUNTERS' ) ) {
+			$counters = new ARQAM_LITE_COUNTERS();
+			$arq_counters = $counters->counters_data();
+		}
 
-			set_transient( $cache_field, $cached_data, 24 * HOUR_IN_SECONDS );
-			update_option( $token_key, $token );
+		if( ! empty( $arq_counters ) && is_array( $arq_counters ) ){
 
-			delete_transient( $plugins_field ); // to re-fresh the Plugins stored cache
+			unset( $arq_counters['rss'] );
+			unset( $arq_counters['posts'] );
+			unset( $arq_counters['comments'] );
+			unset( $arq_counters['members'] );
+			unset( $arq_counters['groups'] );
+			unset( $arq_counters['forums'] );
+			unset( $arq_counters['topics'] );
+			unset( $arq_counters['replies'] );
 
-			if( $update_files ){
-				set_transient( $plugins_field, 'true', HOUR_IN_SECONDS );
+			foreach ( $arq_counters as $social_key => $values ) {
+				unset( $arq_counters[ $social_key ]['text'] );
+				unset( $arq_counters[ $social_key ]['icon'] );
+			}
+
+			if( ! empty( $arq_counters ) && is_array( $arq_counters ) ){
+				$body['social'] = $arq_counters;
 			}
 		}
 		else{
 
-			if( isset( $cached_data['status'] ) && $cached_data['status'] == 0 ){
-				update_option( $token_error_key, $cached_data['error'] );
-
-				delete_option( $token_key );
-				delete_transient( $cache_field );
+			$social = tie_get_option( 'social' );
+			if( ! empty( $social ) && is_array( $social ) ){
+				$body['social'] = $social;
 			}
 		}
-	}
 
-	// Debug
-	//var_dump( $cached_data );
+		// Prepare the remote post
+		$response = wp_remote_post( $request_url, array(
+			'headers' => array(
+				'User-Agent' => 'wp/' . get_bloginfo( 'version' ) . ' ; ' . get_bloginfo( 'url' ) . ' ; ' . TIELABS_THEME_ID . ' ; ' . TIELABS_DB_VERSION . ' ; '. md5( $token ). ' ; '. $key,
+			),
+			'body' => apply_filters( 'TieLabs/api_connect_body', $body ),
+			//'sslverify' => false,
+			'timeout'   => 15,
+		));
 
-	# return the data ----------
-	if( ! empty( $cached_data )){
+		// Check Response for errors
+		$response_code    = wp_remote_retrieve_response_code( $response );
+		$response_message = wp_remote_retrieve_response_message( $response );
 
-		if( ! empty( $key ) ){
-			if( ! empty( $cached_data[ $key ] )){
-				return $cached_data[ $key ];
+		if ( is_wp_error( $response ) ){
+			$is_error = true;
+			$response_message = $response->get_error_message();
+		}
+		elseif ( ! empty( $response->errors ) && isset( $response->errors['http_request_failed'] ) ) {
+			$is_error = true;
+			$response_message = esc_html( current( $response->errors['http_request_failed'] ) );
+		}
+		elseif ( 200 !== $response_code ){
+			$is_error = true;
+
+			if( empty( $response_message ) ) {
+				$response_message = 'Connection Error';
 			}
+		}
+
+		// Check if it is a valid response
+		if ( isset( $is_error ) ){
+			tie_debug_log( $response_message, true );
+			set_transient( $server_error_key, $response_message, 12 * HOUR_IN_SECONDS );
 		}
 		else{
-			return $cached_data;
+
+			$cached_data = wp_remote_retrieve_body( $response );
+			$cached_data = json_decode( $cached_data, true );
+
+			//echo '<pre>';
+			//var_dump( $cached_data );
+			//echo '</pre>';
+
+			if( ! empty( $cached_data['status'] ) && $cached_data['status'] == 1 ){
+
+				// Delete Stored Errors
+				delete_option( $token_error_key );
+
+				// Update Cached data
+				$cache_period = ( ! empty( $cached_data['cache_period'] ) && is_numeric( $cached_data['cache_period'] ) ) ? (int) $cached_data['cache_period'] : 24;
+				$cache_period = ( is_integer( $cache_period ) && $cache_period > 4 ) ? $cache_period : 24;
+				$expiration   = $cache_period * HOUR_IN_SECONDS;
+
+				update_option( $cache_key .'_timeout', time() + $expiration );
+				update_option( $cache_key, $cached_data, false );
+				update_option( $token_key, $token, false );
+
+				if( $update_files ){
+					set_transient( $plugins_field, 'true', $expiration );
+				}
+				else{
+					delete_transient( $plugins_field ); // to re-fresh the Plugins stored cache
+				}
+
+				// Use this action to run functions after updating the theme data
+			  do_action( 'TieLabs/after_theme_data_update' );
+			}
+			else{
+
+				if( isset( $cached_data['status'] ) && $cached_data['status'] == 0 ){
+					update_option( $token_error_key, $cached_data['error'], false );
+
+					delete_option( $token_key );
+					delete_option( $cache_key );
+				}
+			}
 		}
+
 	}
 
+	// Return the data
+	if( empty( $cached_data ) ){
+		return false;
+	}
 
-	return false;
+	if( ! empty( $key ) ){
+		if( ! empty( $cached_data[ $key ] ) ){
+			return $cached_data[ $key ];
+		}
+
+		return false;
+	}
+
+	return $cached_data;
 }
 
 

@@ -45,6 +45,17 @@ if( ! class_exists( 'TIE_YOUTUBE_WIDGET' ) ) {
 						<div class="g-ytsubscribe" data-'.$source.'="' .$instance['page_url']. '" data-layout="full" data-count="default"></div>
 					</div>
 				';
+
+				// Fix RTL <div style="display: block; visibility: hidden; position: absolute; width: 106px; left: -1000px; top: -1000px;" direction
+				if( is_rtl() ){
+					echo '
+						<script>
+							jQuery(window).on( "load", function() {
+								jQuery(".gc-bubbleDefault").parent().hide();
+							});
+						</script>
+					';
+				}
 			}
 
 			echo ( $args['after_widget'] );
@@ -97,4 +108,4 @@ if( ! class_exists( 'TIE_YOUTUBE_WIDGET' ) ) {
 	}
 
 }
-?>
+

@@ -94,6 +94,9 @@ if( ! class_exists( 'TIELABS_WOOCOMMERCE' ) ) {
 
 			// Add Support for the the theme text styles in the short description area
 			add_filter( 'woocommerce_short_description', array( $this, 'short_description' ) );
+
+			// Woocommerce Stock Label
+			add_action( 'woocommerce_before_shop_loop_item_title', array( $this, 'stock_label' ), 10 );
 		}
 
 
@@ -537,6 +540,17 @@ if( ! class_exists( 'TIELABS_WOOCOMMERCE' ) ) {
 			}
 
 			return '<div class="entry">'.$short_description.'</div>';
+		}
+
+
+		/*
+		 * Woocommerce Stock Label
+		 */
+		function stock_label(){
+
+			global $product;
+
+			echo wc_get_stock_html( $product );
 		}
 
 	}

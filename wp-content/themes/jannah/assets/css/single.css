@@ -1576,8 +1576,7 @@
   clear: both;
 }
 
-#respond .form-allowed-tags,
-#respond .comment-form-comment label {
+#respond .form-allowed-tags {
   display: none;
 }
 
@@ -2402,6 +2401,7 @@ span.video-close-btn:hover {
 .stream-item-below-post,
 .stream-item-below-post-content {
   margin: 30px auto;
+  clear: both;
 }
 
 #inline-related-post {

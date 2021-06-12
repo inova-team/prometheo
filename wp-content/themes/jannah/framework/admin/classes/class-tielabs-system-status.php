@@ -649,7 +649,7 @@ if( ! class_exists( 'TIELABS_SYSTEM_STATUS' ) ) {
 					<?php if( $demo = get_option( 'tie_installed_demo_'. TIELABS_THEME_ID ) ): ?>
 						<tr>
 							<td data-export-label="Demo Installed"><?php esc_html_e( 'Latest Demo Installed', TIELABS_TEXTDOMAIN ); ?>:</td>
-							<td><?php echo $demo; ?></td>
+							<td><?php echo esc_html( $demo ); ?></td>
 						</tr>
 					<?php endif ?>
 
@@ -658,7 +658,7 @@ if( ! class_exists( 'TIELABS_SYSTEM_STATUS' ) ) {
 										if( is_array( $switcher ) && ! empty( $switcher[0] ) ){ ?>
 						<tr>
 							<td data-export-label="Switched From"><?php esc_html_e( 'Switched From', TIELABS_TEXTDOMAIN ); ?>:</td>
-							<td><?php echo $switcher[0]; ?></td>
+							<td><?php echo esc_html( $switcher[0] ); ?></td>
 						</tr>
 							<?php
 							}

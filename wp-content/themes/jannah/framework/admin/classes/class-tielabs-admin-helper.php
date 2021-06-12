@@ -60,9 +60,11 @@ if( ! class_exists( 'TIELABS_ADMIN_HELPER' ) ) {
 				$categories[] = esc_html__( '- Select a Category -', TIELABS_TEXTDOMAIN );
 			}
 
+			$max_number = apply_filters( 'TieLabs/get_categories/max_number', 500 );
+
 			$args = array(
 				'hide_empty' => false,
-				'number'     => 500
+				'number'     => $max_number
 			);
 
 			// Some websites have more than 5000 categories, which cause slowness
@@ -82,7 +84,7 @@ if( ! class_exists( 'TIELABS_ADMIN_HELPER' ) ) {
 				}
 
 				// Some websites have more than 5000 categories, which cause slowness
-				if( count( $get_categories ) > 500 && ! $args['hide_empty'] ){
+				if( count( $get_categories ) > $max_number && ! $args['hide_empty'] ){
 					update_option( 'tie_huge_categories_list', count( $get_categories ), false );
 				}
 

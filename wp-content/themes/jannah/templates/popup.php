@@ -19,14 +19,14 @@ function tie_popup_search_html( $id, $class = false, $placeholder = false ){
 		$placeholder = esc_html__( 'Search for', TIELABS_TEXTDOMAIN );
 	}
 	?>
-	<div id="<?php echo $id ?>" class="tie-popup tie-popup-search-wrap" style="display: none;">
+	<div id="<?php echo esc_attr( $id ) ?>" class="tie-popup tie-popup-search-wrap" style="display: none;">
 		<a href="#" class="tie-btn-close remove big-btn light-btn">
 			<span class="screen-reader-text"><?php esc_html_e( 'Close', TIELABS_TEXTDOMAIN ); ?></span>
 		</a>
 		<div class="popup-search-wrap-inner">
 			<div class="live-search-parent pop-up-live-search" data-skin="live-search-popup" aria-label="<?php esc_html_e( 'Search', TIELABS_TEXTDOMAIN ); ?>">
 				<form method="get" class="tie-popup-search-form" action="<?php echo esc_url(home_url( '/' )); ?>">
-					<input class="tie-popup-search-input <?php echo ( $class ); ?>" inputmode="search" type="text" name="s" title="<?php esc_html_e( 'Search for', TIELABS_TEXTDOMAIN ) ?>" autocomplete="off" placeholder="<?php echo $placeholder ?>" />
+					<input class="tie-popup-search-input <?php echo ( $class ); ?>" inputmode="search" type="text" name="s" title="<?php esc_html_e( 'Search for', TIELABS_TEXTDOMAIN ) ?>" autocomplete="off" placeholder="<?php echo esc_attr( $placeholder ) ?>" />
 					<button class="tie-popup-search-submit" type="submit">
 						<span class="tie-icon-search tie-search-icon" aria-hidden="true"></span>
 						<span class="screen-reader-text"><?php esc_html_e( 'Search for', TIELABS_TEXTDOMAIN ) ?></span>

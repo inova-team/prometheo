@@ -217,7 +217,9 @@ function jannah_enqueue_scripts(){
 	wp_enqueue_script( 'tie-scripts' );
 
 	// LightBox
-	wp_enqueue_script( 'tie-js-ilightbox' );
+	if( tie_get_option( 'lightbox_all' ) || ( tie_get_option( 'footer_instagram' ) && tie_get_option( 'footer_instagram_media_link' ) == 'file' ) ){
+		wp_enqueue_script( 'tie-js-ilightbox' );
+	}
 
 	// Shortcodes
 	if( TIELABS_EXTENSIONS_IS_ACTIVE ){
@@ -267,7 +269,10 @@ function jannah_enqueue_styles(){
 	wp_enqueue_style( 'tie-css-widgets' );
 	wp_enqueue_style( 'tie-css-helpers' );
 	wp_enqueue_style( 'tie-fontawesome5' );
-	wp_enqueue_style( 'tie-css-ilightbox' );
+
+	if( tie_get_option( 'lightbox_all' ) || ( tie_get_option( 'footer_instagram' ) && tie_get_option( 'footer_instagram_media_link' ) == 'file' ) ){
+		wp_enqueue_style( 'tie-css-ilightbox' );
+	}
 
 	if( TIELABS_EXTENSIONS_IS_ACTIVE ){
 		wp_enqueue_style( 'tie-css-shortcodes' );

@@ -8,7 +8,7 @@
  * will need to copy the new files to your child theme to maintain compatibility.
  *
  * @author 		TieLabs
- * @version   5.0.0
+ * @version   5.4.0
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly
@@ -117,8 +117,13 @@ if( tie_get_option( $components_id.'-components_login' ) ): ?>
 		<li class="profile-icon menu-item custom-menu-link">
 			<a href="#" class="profile-btn">
 				<?php
-					$current_user = wp_get_current_user();
-					echo get_avatar( $current_user->ID, apply_filters( 'TieLabs/Login/avatar_size', 30 ) );
+					if( get_option( 'show_avatars' ) ){
+						$current_user = wp_get_current_user();
+						echo get_avatar( $current_user->ID, apply_filters( 'TieLabs/Login/avatar_size', 30 ) );
+					}
+					else{
+						echo '<span class="tie-icon-author" aria-hidden="true"></span>';
+					}
 				?>
 				<span class="screen-reader-text"><?php esc_html_e( 'Your Profile', TIELABS_TEXTDOMAIN ) ?></span>
 			</a>
@@ -134,7 +139,7 @@ if( tie_get_option( $components_id.'-components_login' ) ): ?>
 			$login_icon_class = tie_get_option( $components_id.'-components_login_text' ) ? 'has-title' : '';
 		?>
 
-		<li class="<?php echo $login_icon_class ?> popup-login-icon menu-item custom-menu-link">
+		<li class="<?php echo esc_attr( $login_icon_class ) ?> popup-login-icon menu-item custom-menu-link">
 			<a href="#" class="lgoin-btn tie-popup-trigger">
 				<span class="tie-icon-author" aria-hidden="true"></span>
 				<?php

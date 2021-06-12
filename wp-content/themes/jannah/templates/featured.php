@@ -523,7 +523,7 @@ if( ! empty( $slider_settings ) ){
 
 				<div class="slider-area-inner">
 
-					<div id="<?php echo $slider_wrapper_id ?>" class="tie-main-slider main-slider <?php echo esc_attr( $slider_class ) ?> tie-slick-slider-wrapper" data-slider-id="<?php echo esc_attr( $slider ) ?>" <?php echo ( $slider_data_attr ) ?>>
+					<div id="<?php echo esc_attr( $slider_wrapper_id ) ?>" class="tie-main-slider main-slider <?php echo esc_attr( $slider_class ) ?> tie-slick-slider-wrapper" data-slider-id="<?php echo esc_attr( $slider ) ?>" <?php echo ( $slider_data_attr ) ?>>
 
 						<?php
 
@@ -738,7 +738,7 @@ if( ! empty( $slider_settings ) ){
 						}
 						?>
 
-						<div class="<?php echo $nav_slider_class ?> ">
+						<div class="<?php echo esc_attr( $nav_slider_class ) ?> ">
 							<ul class="tie-slider-nav"></ul>
 
 							<div class="container">
@@ -753,7 +753,7 @@ if( ! empty( $slider_settings ) ){
 													extract( $single_slide );
 													$count ++; ?>
 
-													<div class="slide tie-slide-<?php echo $count ?>">
+													<div class="slide tie-slide-<?php echo esc_attr( $count ) ?>">
 														<div class="slide-overlay">
 
 															<?php

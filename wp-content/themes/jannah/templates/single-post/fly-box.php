@@ -59,7 +59,7 @@ if( $check_also_query->have_posts() ):
 			</a>
 		</div>
 
-		<div class="<?php echo $block_class; ?>">
+		<div class="<?php echo esc_attr( $block_class ); ?>">
 			<ul class="posts-list-items">
 
 			<?php

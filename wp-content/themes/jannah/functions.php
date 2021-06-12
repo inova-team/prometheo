@@ -19,7 +19,7 @@ if ( version_compare( phpversion(), '5.3', '<' ) ) {
  */
 define( 'TIELABS_THEME_SLUG', 'jannah' );
 define( 'TIELABS_TEXTDOMAIN', 'jannah' );
-define( 'TIELABS_DB_VERSION', '5.4.0' );    // Don't change this
+define( 'TIELABS_DB_VERSION', '5.4.5' );    // Don't change this
 define( 'TIELABS_THEME_ID',   '19659555' ); // Don't change this
 
 define( 'TIELABS_TEMPLATE_PATH', get_template_directory() );
@@ -108,3 +108,4 @@ function jannah_content_width() {
 	 */
 	$GLOBALS['content_width'] = apply_filters( 'TieLabs/content_width', $content_width );
 }
+

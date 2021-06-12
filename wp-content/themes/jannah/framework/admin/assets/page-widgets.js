@@ -373,7 +373,7 @@ var wpPWidgets;
 			});
 
 			$.post( ajaxurl, a, function() {
-				$('.spinner').removeClass( 'is-active' );;
+				$('.spinner').removeClass( 'is-active' );
 			});
 
 			this.resize();

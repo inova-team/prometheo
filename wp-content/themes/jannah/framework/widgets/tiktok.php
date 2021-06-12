@@ -83,15 +83,15 @@ if( ! class_exists( 'TIE_TIKTOK_WIDGET' ) ) {
 										<div class="tie-tiktok-counts clearfix">
 											<ul>
 												<li>
-													<span class="counts-number"><?php echo $this->format_number( $account_info['following_count'] ) ?></span>
+													<span class="counts-number"><?php echo esc_html( $this->format_number( $account_info['following_count'] ) ) ?></span>
 													<span><?php esc_html_e( 'Following', TIELABS_TEXTDOMAIN ) ?></span>
 												</li>
 												<li>
-													<span class="counts-number"><?php echo $this->format_number( $account_info['fans_count'] ) ?></span>
+													<span class="counts-number"><?php echo esc_html( $this->format_number( $account_info['fans_count'] ) ) ?></span>
 													<span><?php esc_html_e( 'Followers', TIELABS_TEXTDOMAIN ) ?></span>
 												</li>
 												<li>
-													<span class="counts-number"><?php echo $this->format_number( $account_info['heart_count'] ) ?></span>
+													<span class="counts-number"><?php echo esc_html( $this->format_number( $account_info['heart_count'] ) ) ?></span>
 													<span><?php esc_html_e( 'Likes', TIELABS_TEXTDOMAIN ) ?></span>
 												</li>
 
@@ -174,7 +174,7 @@ if( ! class_exists( 'TIE_TIKTOK_WIDGET' ) ) {
 			}
 
 			?>
-			<div style="display:<?php echo $show_settings ?>">
+			<div style="display:<?php echo esc_attr( $show_settings ) ?>">
 				<p>
 					<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', TIELABS_TEXTDOMAIN) ?></label>
 					<input id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" class="widefat" type="text" />
@@ -211,7 +211,7 @@ if( ! class_exists( 'TIE_TIKTOK_WIDGET' ) ) {
 									}
 
 									?>
-										<option value="<?php echo $id ?>" <?php selected( $source, $id ); ?>><?php echo $source_name ?></option>
+										<option value="<?php echo esc_attr( $id ) ?>" <?php selected( $source, $id ); ?>><?php echo esc_html( $source_name ) ?></option>
 									<?php
 								}
 

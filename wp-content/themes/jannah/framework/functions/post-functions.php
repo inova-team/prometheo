@@ -163,6 +163,11 @@ if( ! function_exists( 'tie_get_taxonomy_slug' ) ) {
 			return 'category';
 		}
 
+		// Product
+		if( $current_post_type == 'product' ){
+			return 'product_cat';
+		}
+
 		// Custom Post type
 		$taxonomies = get_object_taxonomies( $current_post_type );
 		if( ! empty( $taxonomies ) && is_array( $taxonomies ) ){
@@ -275,6 +280,11 @@ if( ! function_exists( 'tie_get_category' ) ) {
 				}
 				else{
 					$output .= '<a class="post-cat tie-cat-'.$category->term_id.'" href="' . TIELABS_WP_HELPER::get_term_link( $category->term_id, $taxonomy_slug ) . '">' . $category->name.'</a>';
+				}
+
+				// Show the first category only
+				if( $primary ){
+					break;
 				}
 			}
 		}
@@ -789,7 +799,7 @@ if( ! function_exists( 'tie_reading_time' ) ) {
 
 	function tie_reading_time( $before = '<span class="meta-reading-time meta-item"><span class="tie-icon-bookmark" aria-hidden="true"></span> ', $after = '</span> ' ){
 
-		$post_content  = get_post()->post_content;;
+		$post_content  = get_post()->post_content;
 		$post_content  = TIELABS_HELPER::strip_shortcodes( $post_content );
 		$post_content  = strip_shortcodes( strip_tags( $post_content ) );
 		$post_content  = preg_split('/\s+/u', $post_content, null, PREG_SPLIT_NO_EMPTY );

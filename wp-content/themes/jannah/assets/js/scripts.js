@@ -137,28 +137,12 @@ $doc.ready(function(){
 
 	if( tie.ad_blocker_detector && ! $body.hasClass('is-ajax-loaded-post') ){
 
-		// We look at whether FuckAdBlock already exists.
-		if(typeof fuckAdBlock !== 'undefined' || typeof FuckAdBlock !== 'undefined') {
-
-		} else {
-			// Otherwise, you import the script FuckAdBlock
-			var importFAB = document.createElement('script');
-			importFAB.onload = function() {
-				// If all goes well, we configure FuckAdBlock
-				fuckAdBlock.onDetected(adBlockDetected)
-			};
-			importFAB.onerror = function() {
-				// If the script does not load (blocked, integrity error, ...)
-				// Then a detection is triggered
+		if ( jQuery('.Ad-Container').length > 0) {
+			if ( jQuery('.Ad-Container').outerWidth() === 0) {
 				adBlockDetected();
-			};
-			importFAB.integrity = 'sha256-xjwKUY/NgkPjZZBOtOxRYtK20GaqTwUCf7WYCJ1z69w=';
-			importFAB.crossOrigin = 'anonymous';
-			importFAB.src = 'https://cdnjs.cloudflare.com/ajax/libs/fuckadblock/3.2.1/fuckadblock.min.js';
-			document.head.appendChild(importFAB);
+			}
 		}
 	}
-
 
 	/**
 	 * Logged-in user icon
@@ -481,7 +465,7 @@ $doc.ready(function(){
 	// Type To Search
 	// Make sure we are not in an iframe to avoid isues with front-end builders such as Elementor
 	if ( tie.type_to_search && window.self === window.top ){
-		if ( jQuery('#tie-popup-search-desktop').length ){
+		if ( jQuery('#tie-popup-search-desktop').length && ! jQuery('.ql-editor').length ){
 			$doc.bind('keydown', function(e){
 				if( ! jQuery( '.ql-editor' ).is( ':focus' ) && ! jQuery( 'input, textarea' ).is( ':focus' ) && ! jQuery( '#tie-popup-login' ).is( ':visible' ) && ! e.ctrlKey && ! e.metaKey && e.keyCode >= 65 && e.keyCode <= 90 ){
 					$container.removeClass('side-aside-open');
@@ -568,7 +552,7 @@ $doc.ready(function(){
 	},
 
 	//
-	bodyClickFn = function(evt){;;;
+	bodyClickFn = function(evt){
 		if( ! $container.hasClass('side-aside-open') ){
 			return false;
 		}
